@@ -1,11 +1,14 @@
 function loadCourses() {
 
     const courses = [
-        "AWS",
-        "Docker",
-        "Kubernetes",
-        "Jenkins",
-        "DevOps"
+        "AWS Cloud Fundamentals",
+        "Docker Containerization",
+        "Jenkins CI/CD",
+        "Kubernetes Orchestration",
+        "Prometheus Monitoring",
+        "Git & GitHub",
+        "Linux Administration",
+        "DevOps Best Practices"
     ];
 
     const list = document.getElementById("courseList");
