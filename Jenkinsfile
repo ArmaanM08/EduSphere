@@ -7,7 +7,7 @@ pipeline {
         stage('Clone') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/YOUR_USERNAME/edusphere.git'
+                url: 'https://github.com/ArmaanM08/EduSphere.git'
             }
         }
 
