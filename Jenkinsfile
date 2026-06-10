@@ -1,13 +1,11 @@
 pipeline {
-
     agent any
 
     stages {
 
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                git branch: 'main',
-                url: 'https://github.com/ArmaanM08/EduSphere.git'
+                checkout scm
             }
         }
 
@@ -32,6 +30,12 @@ pipeline {
                 dir('frontend') {
                     sh 'docker build -t frontend:latest .'
                 }
+            }
+        }
+
+        stage('Verify Images') {
+            steps {
+                sh 'docker images'
             }
         }
     }
