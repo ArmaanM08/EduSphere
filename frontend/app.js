@@ -19,10 +19,45 @@ function loadCourses() {
 
         const li = document.createElement("li");
 
-        li.textContent = course;
+        const courseData = [
+
+    {
+        name:"AWS Cloud Fundamentals",
+        id:"aws"
+    },
+
+    {
+        name:"Docker Containerization",
+        id:"docker"
+    },
+
+    {
+        name:"Kubernetes Orchestration",
+        id:"kubernetes"
+    },
+
+    {
+        name:"Jenkins CI/CD",
+        id:"jenkins"
+    }
+
+];
+
+courseData.forEach(course => {
+
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+        <a href="course.html?id=${course.id}">
+            ${course.name}
+        </a>
+    `;
+
+    list.appendChild(li);
+
+});
 
         list.appendChild(li);
 
     });
 }
-
