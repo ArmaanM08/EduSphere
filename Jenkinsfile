@@ -33,9 +33,36 @@ pipeline {
             }
         }
 
-        stage('Verify Images') {
+        stage('Import Images Into K3s') {
             steps {
-                sh 'docker images'
+                sh '''
+                docker save auth-service:latest -o auth-service.tar
+                sudo k3s ctr images import auth-service.tar
+
+                docker save course-service:latest -o course-service.tar
+                sudo k3s ctr images import course-service.tar
+
+                docker save frontend:latest -o frontend.tar
+                sudo k3s ctr images import frontend.tar
+                '''
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                kubectl apply -f k8/
+
+                kubectl rollout restart deployment auth-service
+                kubectl rollout restart deployment course-service
+                kubectl rollout restart deployment frontend
+                '''
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                sh 'kubectl get pods'
             }
         }
     }
